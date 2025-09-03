@@ -1,24 +1,6 @@
 #include "SearchBinTree.h"
 #include<stdio.h>
 #include<stdlib.h>
-#include <ctype.h>
-#include <limits.h> // para INT_MIN e INT_MAX
-
-bool isBSTUtil(TNo* node, int min, int max) {
-    if (node == NULL)
-        return true;
-
-    if (node->key <= min || node->key >= max)
-        return false;
-
-    return isBSTUtil(node->left, min, node->key) &&
-           isBSTUtil(node->right, node->key, max);
-}
-
-bool BinTree_isBST(BinTree* tree) {
-    return isBSTUtil(tree->root, INT_MIN, INT_MAX);
-}
-
 TNo* TNo_createNFill(int key){
     TNo* novo = malloc(sizeof(TNo));
     if(novo){
@@ -84,52 +66,4 @@ void BinTree_pos(TNo* root){
             BinTree_pos(root->right);
         printf("%d, ", root->key);
     }    
-}
-
-TNo* parseTree(const char* str, int* pos, TNo* parent) {
-    if (str[*pos] != '(') return NULL;
-    (*pos)++;
-
-
-    if (str[*pos] == ')') {
-        (*pos)++;
-        return NULL;
-    }
-
-
-    int num = 0, sign = 1;
-    if (str[*pos] == '-') {
-        sign = -1;
-        (*pos)++;
-    }
-    while (isdigit(str[*pos])) {
-        num = num * 10 + (str[*pos] - '0');
-        (*pos)++;
-    }
-    num *= sign;
-
-    TNo* node = createNode(num);
-    node->p = parent;
-
-    node->left = parseTree(str, pos, node);
-
-
-    node->right = parseTree(str, pos, node);
-
-    (*pos)++;
-    return node;
-}
-
-TNo* createNode(int key) {
-    TNo* node = (TNo*) malloc(sizeof(TNo));
-    node->key = key;
-    node->left = node->right = node->p = NULL;
-    return node;
-}
-
-BinTree* BinTree_create_from_string(const char* str) {
-    BinTree* tree = (BinTree*) malloc(sizeof(BinTree));
-    int pos = 0;
-    tree->root = parseTree(str, &pos, NULL);
-    return tree;
 }

@@ -17,8 +17,6 @@ TNo* BinTree_search(TNo*, int);
 void BinTree_pre(TNo*);
 void BinTree_in(TNo*);
 void BinTree_pos(TNo*);
-TNo* createNode(int key);
-BinTree* BinTree_create_from_string(const char* str);
-bool BinTree_isBST(BinTree* tree);
+
 
 #endif
