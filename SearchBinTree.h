@@ -17,6 +17,6 @@ TNo* BinTree_search(TNo*, int);
 void BinTree_pre(TNo*);
 void BinTree_in(TNo*);
 void BinTree_pos(TNo*);
-
+bool BinTree_delete(BinTree*, int);
 
 #endif
