@@ -7,22 +7,21 @@ void PrintTree(BinTree *T)
     putchar('\n');
     BinTree_in(T->root);
     putchar('\n');
-    putchar('\n');
-    if (BinTree_isBST(T))
-        printf("É uma BST válida!\n");
-    else
-        printf("NÃO é uma BST!\n");
 }
-
 int main()
 {
-    char input[256];
-    printf("Enter tree in format (value(left_subtree)(right_subtree)): ");
-    fgets(input, sizeof(input), stdin);
-    int pos = 0;
-    BinTree *tree = BinTree_create_from_string(input);
-
-    PrintTree(tree);
+    int V[] = {10, 5, 2, 7, 20, 15, 25};
+    BinTree *T = BinTree_create();
+    for (int i = 0; i < 7; i++)
+        if (!BinTree_insert(T, V[i]))
+            printf("Erro ao inserir o elemento V[%i] = %i\n", i, V[i]);
+    PrintTree(T);
+    int key = 10;
+    printf("Removendo o elemento %i\n", key);
+    if (BinTree_delete(T, key))
+        PrintTree(T);
+    else
+        printf("Erro ao remover o elemento %i\n", key);
 
     return 0;
 }
